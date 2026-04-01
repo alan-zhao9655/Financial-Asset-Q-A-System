@@ -1,0 +1,11 @@
+# RAG pipeline dependencies
+# Requires torch (installed separately for platform-specific wheels):
+#   pip install torch          # arm64 macOS (M-series), CUDA Linux
+# Then install this file:
+#   pip install -r requirements-rag.txt
+
+faiss-cpu>=1.9.0
+sentence-transformers>=3.0.0
+wikipedia-api>=0.6.0
+rank_bm25>=0.2.2
+tavily-python>=0.5.0
