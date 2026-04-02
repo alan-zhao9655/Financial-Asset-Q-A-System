@@ -71,3 +71,30 @@ body {
 .answer-body p      { margin: 0 0 0.5rem 0; color: #8aaccc; }
 .answer-body strong { color: #d0e8ff; font-weight: 600; }
 .answer-body em     { color: #4a7090; }
+
+/* ── Markdown tables (GFM) ── */
+.answer-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0 0.75rem;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+.answer-body thead tr { border-bottom: 1px solid #1a3a60; }
+.answer-body th {
+  padding: 6px 12px;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4a7090;
+}
+.answer-body td {
+  padding: 6px 12px;
+  color: #c8e4f8;
+  border-bottom: 1px solid #0e2038;
+}
+.answer-body tr:last-child td { border-bottom: none; }
+.answer-body td:first-child,
+.answer-body th:first-child   { color: #4a7090; font-weight: 600; }

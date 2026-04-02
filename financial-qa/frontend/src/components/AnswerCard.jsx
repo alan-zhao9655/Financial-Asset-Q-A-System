@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import ChartPanel from './ChartPanel'
 
 function parseSections(text) {
@@ -108,7 +109,7 @@ export default function AnswerCard({ text, queryType, ticker, chartData }) {
               </div>
             )}
             <div className="answer-body">
-              <ReactMarkdown>{body}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
             </div>
           </div>
         )
