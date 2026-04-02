@@ -125,7 +125,9 @@ export default function App() {
         setOrbState(qType)
         setMessages(prev => [...prev, {
           role: 'assistant-answer', content: data.message,
-          queryType: qType, ticker: data.ticker, id: Date.now() + 1,
+          queryType: qType, ticker: data.ticker,
+          chartData: data.chart_data || null,
+          id: Date.now() + 1,
         }])
         setTimeout(() => setOrbState('idle'), 4000)
       }

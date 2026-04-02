@@ -38,6 +38,7 @@ class ChatResponse(BaseModel):
     ticker: str | None = None
     refined_question: str | None = None
     context_summary: str | None = None  # updated summary if history was compressed
+    chart_data: dict | None = None  # OHLCV + earnings for frontend chart (market only)
 
 
 class SummarizeRequest(BaseModel):

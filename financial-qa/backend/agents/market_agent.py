@@ -20,7 +20,8 @@ def _get_client() -> anthropic.AsyncAnthropic:
     return _client
 
 
-async def handle_market_query(question: str, ticker: str) -> str:
+async def handle_market_query(question: str, ticker: str) -> tuple[str, dict]:
+    """Return (answer_text, chart_data) where chart_data is ready for the frontend."""
     data = fetch_stock_data(ticker)
     metrics = compute_metrics(data)
     news = fetch_news(ticker)
@@ -71,4 +72,12 @@ async def handle_market_query(question: str, ticker: str) -> str:
         messages=[{"role": "user", "content": user_content}],
     )
 
-    return response.content[0].text
+    chart_data = {
+        "ticker":             data.ticker,
+        "company_name":       data.company_name,
+        "currency":           data.currency,
+        "price_history":      data.price_history_ohlcv,
+        "quarterly_earnings": data.quarterly_earnings,
+    }
+
+    return response.content[0].text, chart_data

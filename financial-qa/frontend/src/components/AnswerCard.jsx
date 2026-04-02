@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import ChartPanel from './ChartPanel'
 
 function parseSections(text) {
   const lines = text.split('\n')
@@ -39,24 +41,55 @@ function getMeta(heading) {
   return SECTION_META.default
 }
 
-export default function AnswerCard({ text, queryType, ticker }) {
+export default function AnswerCard({ text, queryType, ticker, chartData }) {
+  const [showChart, setShowChart] = useState(false)
   const sections = parseSections(text)
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+      {/* Header row: ticker badge + chart toggle */}
       {ticker && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-          <span style={{
-            fontSize: 12, fontFamily: 'monospace', fontWeight: 700,
-            letterSpacing: '0.1em', padding: '2px 8px', borderRadius: 4,
-            color: '#60b4ff', background: '#60b4ff18', border: '1px solid #60b4ff35',
-          }}>
-            {ticker}
-          </span>
-          <span style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#2a5070' }}>
-            {queryType === 'market' ? 'Market Analysis' : 'Knowledge Base'}
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{
+              fontSize: 12, fontFamily: 'monospace', fontWeight: 700,
+              letterSpacing: '0.1em', padding: '2px 8px', borderRadius: 4,
+              color: '#60b4ff', background: '#60b4ff18', border: '1px solid #60b4ff35',
+            }}>
+              {ticker}
+            </span>
+            <span style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#2a5070' }}>
+              {queryType === 'market' ? 'Market Analysis' : 'Knowledge Base'}
+            </span>
+          </div>
+          {chartData && (
+            <button
+              onClick={() => setShowChart(s => !s)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 5,
+                padding: '4px 12px', borderRadius: 6, border: 'none', cursor: 'pointer',
+                fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+                background: showChart ? '#2070c0'    : '#2070c018',
+                color:      showChart ? '#e8f4ff'    : '#2070c0',
+                border:     `1px solid ${showChart ? '#2070c0' : '#2070c040'}`,
+                transition: 'background 0.2s, color 0.2s',
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <rect x="1" y="7" width="2" height="4" rx="0.5" fill="currentColor" opacity="0.6"/>
+                <rect x="5" y="4" width="2" height="7" rx="0.5" fill="currentColor" opacity="0.8"/>
+                <rect x="9" y="1" width="2" height="10" rx="0.5" fill="currentColor"/>
+              </svg>
+              {showChart ? 'Hide Chart' : 'View Chart'}
+            </button>
+          )}
         </div>
       )}
+
+      {/* Chart panel */}
+      {showChart && chartData && <ChartPanel chartData={chartData} />}
+
+      {/* Answer sections */}
       {sections.map((sec, i) => {
         const meta = getMeta(sec.heading)
         const body = sec.body.join('\n').trim()

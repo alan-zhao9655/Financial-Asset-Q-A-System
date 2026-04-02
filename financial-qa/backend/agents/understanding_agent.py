@@ -211,7 +211,7 @@ async def handle_chat(
             }
         log.info("[ROUTE] market | ticker=%s | question=%r", ticker, refined_question)
         try:
-            answer = await handle_market_query(refined_question, ticker)
+            answer, chart_data = await handle_market_query(refined_question, ticker)
         except RuntimeError as e:
             return {
                 "type": "clarify",
@@ -224,6 +224,7 @@ async def handle_chat(
             "query_type": "market",
             "ticker": ticker,
             "refined_question": refined_question,
+            "chart_data": chart_data,
             "context_summary": None,
         }
 

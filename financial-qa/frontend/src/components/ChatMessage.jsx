@@ -48,7 +48,12 @@ export default function ChatMessage({ msg }) {
       <div className="msg-enter" style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
         <Avatar />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <AnswerCard text={msg.content} queryType={msg.queryType} ticker={msg.ticker} />
+          <AnswerCard
+            text={msg.content}
+            queryType={msg.queryType}
+            ticker={msg.ticker}
+            chartData={msg.chartData}
+          />
         </div>
       </div>
     )

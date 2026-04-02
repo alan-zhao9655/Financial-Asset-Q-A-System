@@ -44,8 +44,11 @@ class StockData:
     # Daily OHLCV history, sorted oldest → newest
     history: pd.DataFrame = field(default_factory=pd.DataFrame)
     # Quarterly income statement rows (up to 4 most recent quarters)
-    # Each entry: {"period": "2024-12-31", "revenue": 1.2e11, "net_income": 3.6e10, "eps": 2.41}
+    # Each entry: {"period": "2024-12-31", "revenue": 1.2e11, "net_income": 3.6e10}
     quarterly_earnings: list[dict] = field(default_factory=list)
+    # Serialised OHLCV for charting — list of dicts with keys:
+    # time (YYYY-MM-DD), open, high, low, close, volume
+    price_history_ohlcv: list[dict] = field(default_factory=list)
 
 
 def fetch_stock_data(ticker: str, period: str = "3mo") -> StockData:
@@ -143,6 +146,19 @@ def fetch_stock_data(ticker: str, period: str = "3mo") -> StockData:
     except Exception:
         pass
 
+    # --- Serialise OHLCV for the frontend chart ---
+    price_history_ohlcv: list[dict] = []
+    for ts, row in hist.iterrows():
+        date_str = ts.strftime("%Y-%m-%d") if hasattr(ts, "strftime") else str(ts)[:10]
+        price_history_ohlcv.append({
+            "time":   date_str,
+            "open":   round(float(row["Open"]),   4),
+            "high":   round(float(row["High"]),   4),
+            "low":    round(float(row["Low"]),    4),
+            "close":  round(float(row["Close"]),  4),
+            "volume": int(row["Volume"]),
+        })
+
     return StockData(
         ticker=ticker.upper(),
         company_name=_get("longName", ticker.upper()),
@@ -158,4 +174,5 @@ def fetch_stock_data(ticker: str, period: str = "3mo") -> StockData:
         industry=_get("industry"),
         history=hist,
         quarterly_earnings=quarterly_earnings,
+        price_history_ohlcv=price_history_ohlcv,
     )
