@@ -59,7 +59,7 @@ export default function AnswerCard({ text, queryType, ticker, chartData }) {
               {ticker}
             </span>
             <span style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#2a5070' }}>
-              {queryType === 'market' ? 'Market Analysis' : 'Knowledge Base'}
+              {queryType === 'market' ? 'Market Analysis' : queryType === 'comparison' ? 'Comparison' : 'Knowledge Base'}
             </span>
           </div>
           {chartData && (
@@ -67,7 +67,7 @@ export default function AnswerCard({ text, queryType, ticker, chartData }) {
               onClick={() => setShowChart(s => !s)}
               style={{
                 display: 'flex', alignItems: 'center', gap: 5,
-                padding: '4px 12px', borderRadius: 6, border: 'none', cursor: 'pointer',
+                padding: '4px 12px', borderRadius: 6, cursor: 'pointer',
                 fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
                 background: showChart ? '#2070c0'    : '#2070c018',
                 color:      showChart ? '#e8f4ff'    : '#2070c0',

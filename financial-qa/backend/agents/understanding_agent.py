@@ -4,8 +4,14 @@ import anthropic
 from market.ticker_resolver import resolve_ticker
 from agents.market_agent import handle_market_query
 from agents.rag_agent import handle_knowledge_query
+from agents.comparison_agent import handle_comparison_query
 
 log = logging.getLogger(__name__)
+
+
+def _parse_tickers(raw: str) -> list[str]:
+    """Split a potentially comma/space-separated ticker string into clean symbols."""
+    return [s.strip().upper() for s in raw.replace(",", " ").split() if s.strip()]
 
 _client: anthropic.AsyncAnthropic | None = None
 
@@ -209,9 +215,30 @@ async def handle_chat(
                 "message": "Which company or stock are you asking about?",
                 "context_summary": None,
             }
-        log.info("[ROUTE] market | ticker=%s | question=%r", ticker, refined_question)
+
+        symbols = _parse_tickers(ticker)
+
+        # ── Multi-stock comparison ──────────────────────────────────────────
+        if len(symbols) > 1:
+            log.info("[ROUTE] comparison | tickers=%s | question=%r", symbols, refined_question)
+            try:
+                answer, chart_data = await handle_comparison_query(refined_question, symbols)
+            except RuntimeError as e:
+                return {"type": "clarify", "message": str(e), "context_summary": None}
+            return {
+                "type": "ready",
+                "message": answer,
+                "query_type": "comparison",
+                "ticker": ", ".join(symbols),
+                "refined_question": refined_question,
+                "chart_data": chart_data,
+                "context_summary": None,
+            }
+
+        # ── Single stock ────────────────────────────────────────────────────
+        log.info("[ROUTE] market | ticker=%s | question=%r", symbols[0], refined_question)
         try:
-            answer, chart_data = await handle_market_query(refined_question, ticker)
+            answer, chart_data = await handle_market_query(refined_question, symbols[0])
         except RuntimeError as e:
             return {
                 "type": "clarify",
@@ -222,7 +249,7 @@ async def handle_chat(
             "type": "ready",
             "message": answer,
             "query_type": "market",
-            "ticker": ticker,
+            "ticker": symbols[0],
             "refined_question": refined_question,
             "chart_data": chart_data,
             "context_summary": None,
