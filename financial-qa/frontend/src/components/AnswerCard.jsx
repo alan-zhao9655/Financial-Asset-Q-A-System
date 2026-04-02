@@ -109,7 +109,16 @@ export default function AnswerCard({ text, queryType, ticker, chartData }) {
               </div>
             )}
             <div className="answer-body">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a: ({ href, children }) => (
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {children}
+                    </a>
+                  ),
+                }}
+              >{body}</ReactMarkdown>
             </div>
           </div>
         )
