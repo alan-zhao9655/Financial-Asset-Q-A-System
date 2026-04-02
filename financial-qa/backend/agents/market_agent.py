@@ -33,7 +33,7 @@ async def handle_market_query(question: str, ticker: str) -> tuple[str, dict]:
         len(news),
         len(data.quarterly_earnings) if data.quarterly_earnings else 0,
     )
-    news_snippets = [f"{n.title} — {n.snippet}" for n in news]
+    news_items = [{"title": n.title, "url": n.url, "snippet": n.snippet} for n in news]
 
     user_content = build_market_prompt(
         ticker=metrics.ticker,
@@ -59,7 +59,7 @@ async def handle_market_query(question: str, ticker: str) -> tuple[str, dict]:
         dividend_yield=data.dividend_yield,
         sector=data.sector,
         industry=data.industry,
-        news_snippets=news_snippets,
+        news_items=news_items,
         user_question=question,
         quarterly_earnings=data.quarterly_earnings,
     )

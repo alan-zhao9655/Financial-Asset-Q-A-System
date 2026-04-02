@@ -24,6 +24,9 @@ Rules:
 - Never hallucinate numbers. Only use the figures provided in the data block.
 - If a metric is not available, say "data not available" rather than guessing.
 - Do not give personalised investment advice or recommend buying/selling.
+- NEWS LINKS: Each news item in the data block includes a URL. When you reference \
+  a news item in your Analysis, cite it as a markdown hyperlink: [Headline](url). \
+  Only use URLs that were explicitly provided — never fabricate links.
 - FORMATTING: Section headers must use exactly '## ' (two hashes + space). \
   Never use # or ### or bold text as a substitute for section headers.
 """
@@ -53,7 +56,7 @@ def build_market_prompt(
     dividend_yield,
     sector,
     industry,
-    news_snippets: list[str],
+    news_items: list[dict],   # each: {"title": str, "url": str, "snippet": str}
     user_question: str,
     quarterly_earnings: list[dict] | None = None,
 ) -> str:
@@ -83,9 +86,23 @@ def build_market_prompt(
             return f"{v/1e6:.2f}M"
         return str(int(v))
 
-    news_block = "\n".join(
-        f"  [{i+1}] {s}" for i, s in enumerate(news_snippets)
-    ) or "  No recent news available."
+    def _fmt_news(items):
+        if not items:
+            return "  No recent news available."
+        lines = []
+        for i, item in enumerate(items):
+            title   = item.get("title", "")
+            url     = item.get("url", "")
+            snippet = item.get("snippet", "")
+            link    = f"  [{i+1}] {title}"
+            if url:
+                link += f"\n       URL: {url}"
+            if snippet:
+                link += f"\n       {snippet}"
+            lines.append(link)
+        return "\n".join(lines)
+
+    news_block = _fmt_news(news_items)
 
     return f"""\
 === MARKET DATA BLOCK FOR {ticker} ({company_name}) ===
