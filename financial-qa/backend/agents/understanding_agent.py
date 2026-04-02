@@ -56,6 +56,15 @@ immediately. Do not ask unnecessary questions.
 NOVICE PATH: Ask one warm, plain-English question at a time. Mention what the system can \
 do if that helps orient them. Never re-ask something already answered in the history.
 
+CONTEXT RESOLUTION (critical): Users often refer back to stocks discussed earlier using \
+pronouns or vague phrases — "it", "that stock", "the data", "compare it with X", \
+"now do the same for Y", "what about its earnings?". \
+Always scan the conversation history to resolve these implicit references. \
+If a previous turn discussed TSLA and the user now says "compare the data with Apple", \
+the ticker field must contain BOTH "TSLA, AAPL" — not just AAPL. \
+Populate ticker and/or company_name using history context whenever the current message \
+alone is ambiguous. Never ask the user to repeat information already in the history.
+
 When generating clarifying_question, be natural and friendly. Examples:
 - "Are you looking to check how a specific stock is performing, or would you like me to \
 explain a financial concept?"
@@ -100,11 +109,23 @@ _ASSESS_TOOL = {
             },
             "ticker": {
                 "type": "string",
-                "description": "Explicit ticker symbol if the user provided one (e.g. AAPL). Omit otherwise.",
+                "description": (
+                    "Ticker symbol(s) for this query. Include tickers mentioned explicitly "
+                    "in the current message AND any tickers that must be inferred from "
+                    "conversation history (e.g. if the user says 'compare it with Apple' "
+                    "and the previous turn was about TSLA, set this to 'TSLA, AAPL'). "
+                    "Separate multiple tickers with commas."
+                ),
             },
             "refined_question": {
                 "type": "string",
-                "description": "A clean, specific version of the user's question. Populated when ready=true.",
+                "description": (
+                    "A clean, fully self-contained version of the user's question with all "
+                    "pronouns and implicit references resolved using conversation history. "
+                    "Must make sense without any prior context "
+                    "(e.g. 'Compare TSLA and AAPL performance' not 'compare the data with Apple'). "
+                    "Populated when ready=true."
+                ),
             },
             "clarifying_question": {
                 "type": "string",
