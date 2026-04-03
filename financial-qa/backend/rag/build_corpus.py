@@ -73,6 +73,7 @@ CATEGORIZED_ARTICLES = {
         ("52-week high", "52_week_high_low.md"),
         ("Relative strength index", "rsi.md"),
         ("Moving average", "moving_averages.md"),
+        ("MACD", "macd.md"),
         ("Volatility (finance)", "volatility.md"),
     ],
     "Macroeconomics & Banking": [

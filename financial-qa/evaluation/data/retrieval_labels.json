@@ -8,8 +8,8 @@
   {
     "id": "ret02",
     "query": "How does dollar-cost averaging reduce investment risk?",
-    "expected_sources": ["dollar_cost_averaging"],
-    "note": "Single-article topic, should have high rerank score"
+    "expected_sources": ["dollar_cost_averaging", "dividends"],
+    "note": "dividends.md 'Dividend reinvestment' section explicitly explains DCA — legitimate cross-article hit"
   },
   {
     "id": "ret03",
@@ -26,14 +26,14 @@
   {
     "id": "ret05",
     "query": "What is EBITDA and why is it used?",
-    "expected_sources": ["ebitda"],
-    "note": "Corporate finance metric"
+    "expected_sources": ["ebitda", "operating_margin"],
+    "note": "operating_margin.md 'Construction' section defines EBITDA explicitly — legitimate cross-article hit"
   },
   {
     "id": "ret06",
     "query": "Explain short selling and the risks involved",
-    "expected_sources": ["short_selling"],
-    "note": "Trading concept with risk aspects"
+    "expected_sources": ["short_selling", "stock"],
+    "note": "stock.md has a dedicated 'Short selling' section — legitimate cross-article hit"
   },
   {
     "id": "ret07",
@@ -140,8 +140,8 @@
   {
     "id": "ret24",
     "query": "What is moving average convergence divergence (MACD)?",
-    "expected_sources": ["moving_averages"],
-    "note": "MACD is based on moving averages — should still retrieve the article"
+    "expected_sources": ["macd", "moving_averages"],
+    "note": "macd.md added to corpus; moving_averages is a valid fallback. Pre-macd addition this correctly fell below confidence threshold and triggered web search."
   },
   {
     "id": "ret25",
