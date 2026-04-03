@@ -72,9 +72,9 @@
   {
     "id": "r11",
     "query": "Explain what P/E ratio means for Apple",
-    "expected_type": "market",
-    "expected_ticker": "AAPL",
-    "note": "'explain' + specific asset = market query for live P/E"
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "'explain what X means for Y' = concept explanation, not a live data query. Agent correctly routes to knowledge."
   },
   {
     "id": "r12",
