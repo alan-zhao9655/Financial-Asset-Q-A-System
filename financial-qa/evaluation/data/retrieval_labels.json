@@ -1,0 +1,152 @@
+[
+  {
+    "id": "ret01",
+    "query": "What is a P/E ratio and how is it calculated?",
+    "expected_sources": ["pe_ratio"],
+    "note": "Core valuation metric, direct article match"
+  },
+  {
+    "id": "ret02",
+    "query": "How does dollar-cost averaging reduce investment risk?",
+    "expected_sources": ["dollar_cost_averaging"],
+    "note": "Single-article topic, should have high rerank score"
+  },
+  {
+    "id": "ret03",
+    "query": "What is the difference between ETFs and mutual funds?",
+    "expected_sources": ["etfs", "mutual_funds"],
+    "note": "Cross-article question — both sources should appear in top-5"
+  },
+  {
+    "id": "ret04",
+    "query": "How do bonds generate returns for investors?",
+    "expected_sources": ["bonds"],
+    "note": "Fixed-income concept"
+  },
+  {
+    "id": "ret05",
+    "query": "What is EBITDA and why is it used?",
+    "expected_sources": ["ebitda"],
+    "note": "Corporate finance metric"
+  },
+  {
+    "id": "ret06",
+    "query": "Explain short selling and the risks involved",
+    "expected_sources": ["short_selling"],
+    "note": "Trading concept with risk aspects"
+  },
+  {
+    "id": "ret07",
+    "query": "How does quantitative easing work?",
+    "expected_sources": ["quantitative_easing", "central_banks", "federal_reserve"],
+    "note": "Macro policy — multiple relevant articles"
+  },
+  {
+    "id": "ret08",
+    "query": "What is WACC and how is it used in valuation?",
+    "expected_sources": ["wacc", "dcf_valuation"],
+    "note": "WACC is a component of DCF — cross-article"
+  },
+  {
+    "id": "ret09",
+    "query": "What causes a recession?",
+    "expected_sources": ["recession", "gdp", "interest_rates"],
+    "note": "Macro concept with multiple contributing factors"
+  },
+  {
+    "id": "ret10",
+    "query": "How do options contracts work?",
+    "expected_sources": ["options", "derivatives"],
+    "note": "Options is a type of derivative"
+  },
+  {
+    "id": "ret11",
+    "query": "What is the price-to-book ratio?",
+    "expected_sources": ["pb_ratio"],
+    "note": "Valuation metric with dedicated article"
+  },
+  {
+    "id": "ret12",
+    "query": "How does portfolio diversification reduce risk?",
+    "expected_sources": ["portfolio_diversification"],
+    "note": "Investment strategy concept"
+  },
+  {
+    "id": "ret13",
+    "query": "What is the RSI indicator in technical analysis?",
+    "expected_sources": ["rsi"],
+    "note": "Technical analysis concept"
+  },
+  {
+    "id": "ret14",
+    "query": "Explain the relationship between inflation and interest rates",
+    "expected_sources": ["inflation", "interest_rates", "federal_reserve"],
+    "note": "Cross-article macro relationship"
+  },
+  {
+    "id": "ret15",
+    "query": "What is free cash flow and why do investors care about it?",
+    "expected_sources": ["free_cash_flow", "cash_flow_statement"],
+    "note": "FCF defined in own article + context in cash flow statement"
+  },
+  {
+    "id": "ret16",
+    "query": "How does margin trading work?",
+    "expected_sources": ["margin_trading"],
+    "note": "Trading concept with single dedicated article"
+  },
+  {
+    "id": "ret17",
+    "query": "What is return on equity and how is it interpreted?",
+    "expected_sources": ["roe", "roa"],
+    "note": "ROE primary, ROA related profitability metric"
+  },
+  {
+    "id": "ret18",
+    "query": "What is a stock split and does it affect company value?",
+    "expected_sources": ["stock_splits", "stock", "market_cap"],
+    "note": "Corporate action — several related articles"
+  },
+  {
+    "id": "ret19",
+    "query": "How do central banks influence the economy?",
+    "expected_sources": ["central_banks", "federal_reserve", "interest_rates"],
+    "note": "Macro policy, multiple relevant sources"
+  },
+  {
+    "id": "ret20",
+    "query": "What is the difference between a bear market and a bull market?",
+    "expected_sources": ["bear_bull_markets"],
+    "note": "Market terminology, single dedicated article"
+  },
+  {
+    "id": "ret21",
+    "query": "How is enterprise value different from market cap?",
+    "expected_sources": ["enterprise_value", "market_cap"],
+    "note": "Two closely related valuation metrics"
+  },
+  {
+    "id": "ret22",
+    "query": "What are futures contracts and how are they used for hedging?",
+    "expected_sources": ["futures", "derivatives", "commodities"],
+    "note": "Futures in context of broader derivatives/commodities"
+  },
+  {
+    "id": "ret23",
+    "query": "Explain dividend investing and how yield is calculated",
+    "expected_sources": ["dividend_yield", "dividends"],
+    "note": "Two separate articles on dividends"
+  },
+  {
+    "id": "ret24",
+    "query": "What is moving average convergence divergence (MACD)?",
+    "expected_sources": ["moving_averages"],
+    "note": "MACD is based on moving averages — should still retrieve the article"
+  },
+  {
+    "id": "ret25",
+    "query": "How is gross profit different from net income?",
+    "expected_sources": ["gross_profit", "net_income", "income_statement"],
+    "note": "P&L line items — cross-article accounting question"
+  }
+]

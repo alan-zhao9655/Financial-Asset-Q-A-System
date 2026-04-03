@@ -1,0 +1,282 @@
+[
+  {
+    "id": "r01",
+    "query": "What is AAPL's current stock price?",
+    "expected_type": "market",
+    "expected_ticker": "AAPL",
+    "note": "Direct market query with explicit ticker"
+  },
+  {
+    "id": "r02",
+    "query": "How has Tesla performed this month?",
+    "expected_type": "market",
+    "expected_ticker": "TSLA",
+    "note": "Market query with company name, needs ticker resolution"
+  },
+  {
+    "id": "r03",
+    "query": "What is a P/E ratio?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Pure concept question, no asset needed"
+  },
+  {
+    "id": "r04",
+    "query": "Explain how bonds work",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "'explain' keyword, pure concept"
+  },
+  {
+    "id": "r05",
+    "query": "What's the difference between ETFs and mutual funds?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Conceptual comparison, no specific asset"
+  },
+  {
+    "id": "r06",
+    "query": "NVDA 30-day momentum",
+    "expected_type": "market",
+    "expected_ticker": "NVDA",
+    "note": "Expert-style terse query, ready immediately"
+  },
+  {
+    "id": "r07",
+    "query": "Compare TSLA and AAPL",
+    "expected_type": "comparison",
+    "expected_ticker": "TSLA,AAPL",
+    "note": "Explicit multi-ticker comparison"
+  },
+  {
+    "id": "r08",
+    "query": "What is Apple's market cap?",
+    "expected_type": "market",
+    "expected_ticker": "AAPL",
+    "note": "Market fundamental question with company name"
+  },
+  {
+    "id": "r09",
+    "query": "How does dollar-cost averaging work?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Strategy explanation, no live data needed"
+  },
+  {
+    "id": "r10",
+    "query": "What is Microsoft's dividend yield?",
+    "expected_type": "market",
+    "expected_ticker": "MSFT",
+    "note": "Market query — answer depends on live data"
+  },
+  {
+    "id": "r11",
+    "query": "Explain what P/E ratio means for Apple",
+    "expected_type": "market",
+    "expected_ticker": "AAPL",
+    "note": "'explain' + specific asset = market query for live P/E"
+  },
+  {
+    "id": "r12",
+    "query": "What is quantitative easing?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Macroeconomics concept, in corpus"
+  },
+  {
+    "id": "r13",
+    "query": "MSFT vs GOOGL last 30 days",
+    "expected_type": "comparison",
+    "expected_ticker": "MSFT,GOOGL",
+    "note": "Expert comparison query"
+  },
+  {
+    "id": "r14",
+    "query": "What is the 52-week high for Amazon?",
+    "expected_type": "market",
+    "expected_ticker": "AMZN",
+    "note": "Market range query"
+  },
+  {
+    "id": "r15",
+    "query": "How do options contracts work?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Derivatives concept, in corpus"
+  },
+  {
+    "id": "r16",
+    "query": "What is BABA's P/E ratio",
+    "expected_type": "market",
+    "expected_ticker": "BABA",
+    "note": "Classic misclassification case from Stage 2 — 'what is' keyword but needs live data"
+  },
+  {
+    "id": "r17",
+    "query": "Tell me recent news about Tesla",
+    "expected_type": "market",
+    "expected_ticker": "TSLA",
+    "note": "News = live data = market route"
+  },
+  {
+    "id": "r18",
+    "query": "What caused the 2008 financial crisis?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Historical event question, not live data"
+  },
+  {
+    "id": "r19",
+    "query": "Is Nvidia a good buy right now?",
+    "expected_type": "market",
+    "expected_ticker": "NVDA",
+    "note": "Investment question requires live context (note: system won't recommend buying)"
+  },
+  {
+    "id": "r20",
+    "query": "What is short selling?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Trading concept, in corpus"
+  },
+  {
+    "id": "r21",
+    "query": "Show me Google's quarterly earnings",
+    "expected_type": "market",
+    "expected_ticker": "GOOGL",
+    "note": "Earnings = live financial data"
+  },
+  {
+    "id": "r22",
+    "query": "explain why BABA crashed last week",
+    "expected_type": "market",
+    "expected_ticker": "BABA",
+    "note": "Classic misclassification case — 'explain' but about recent event for specific stock"
+  },
+  {
+    "id": "r23",
+    "query": "What is Warren Buffett's investment philosophy?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Concept/strategy question, no live data"
+  },
+  {
+    "id": "r24",
+    "query": "How does the Federal Reserve affect interest rates?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Macroeconomics, in corpus"
+  },
+  {
+    "id": "r25",
+    "query": "META AMZN NVDA comparison",
+    "expected_type": "comparison",
+    "expected_ticker": "META,AMZN,NVDA",
+    "note": "Three-way comparison"
+  },
+  {
+    "id": "r26",
+    "query": "What is JPMorgan's stock price today?",
+    "expected_type": "market",
+    "expected_ticker": "JPM",
+    "note": "Market price query with company name"
+  },
+  {
+    "id": "r27",
+    "query": "What is market capitalization?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Valuation concept, in corpus"
+  },
+  {
+    "id": "r28",
+    "query": "How has the S&P 500 performed this year?",
+    "expected_type": "market",
+    "expected_ticker": "SPY",
+    "note": "Index performance = market query; SPY is the standard ETF proxy"
+  },
+  {
+    "id": "r29",
+    "query": "What is WACC and why does it matter?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Corporate finance concept, in corpus"
+  },
+  {
+    "id": "r30",
+    "query": "How volatile is Bitcoin?",
+    "expected_type": "market",
+    "expected_ticker": "BTC-USD",
+    "note": "Crypto market data query"
+  },
+  {
+    "id": "r31",
+    "query": "What does ROE mean?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Concept definition, in corpus"
+  },
+  {
+    "id": "r32",
+    "query": "Show me Apple and Microsoft performance side by side",
+    "expected_type": "comparison",
+    "expected_ticker": "AAPL,MSFT",
+    "note": "Natural language comparison request"
+  },
+  {
+    "id": "r33",
+    "query": "What is Netflix's current volume?",
+    "expected_type": "market",
+    "expected_ticker": "NFLX",
+    "note": "Market trading data"
+  },
+  {
+    "id": "r34",
+    "query": "How does DCF valuation work?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Valuation methodology, in corpus"
+  },
+  {
+    "id": "r35",
+    "query": "What are the latest earnings for Amazon?",
+    "expected_type": "market",
+    "expected_ticker": "AMZN",
+    "note": "Earnings = live financial data"
+  },
+  {
+    "id": "r36",
+    "query": "Explain the concept of free cash flow",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "General concept, not stock-specific"
+  },
+  {
+    "id": "r37",
+    "query": "What is Berkshire Hathaway's book value?",
+    "expected_type": "market",
+    "expected_ticker": "BRK-B",
+    "note": "Market fundamental for specific company"
+  },
+  {
+    "id": "r38",
+    "query": "How do recessions typically affect the stock market?",
+    "expected_type": "knowledge",
+    "expected_ticker": null,
+    "note": "Macro concept, in corpus"
+  },
+  {
+    "id": "r39",
+    "query": "TSLA RIVN LCID comparison EV stocks",
+    "expected_type": "comparison",
+    "expected_ticker": "TSLA,RIVN,LCID",
+    "note": "EV sector comparison with sector context"
+  },
+  {
+    "id": "r40",
+    "query": "What is Nvidia's revenue trend over the past year?",
+    "expected_type": "market",
+    "expected_ticker": "NVDA",
+    "note": "Earnings/revenue trend = market data needed"
+  }
+]
