@@ -13,7 +13,6 @@ import sys
 import os
 import asyncio
 import warnings
-warnings.filterwarnings("ignore", message="Timestamp.utcnow is deprecated", category=FutureWarning)
 
 sys.path.insert(0, os.path.dirname(__file__))
 

@@ -1,12 +1,6 @@
 import warnings
 import logging
 
-# Suppress noisy yfinance / pandas deprecation warnings
-warnings.filterwarnings("ignore", message="Timestamp.utcnow is deprecated")
-warnings.filterwarnings("ignore", message="The 'unit' keyword")
-warnings.filterwarnings("ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
 # Configure structured logging for the application
 logging.basicConfig(
     level=logging.INFO,

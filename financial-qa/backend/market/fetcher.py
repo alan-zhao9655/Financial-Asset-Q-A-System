@@ -1,19 +1,9 @@
 """yfinance wrapper — fetches price history and stock metadata."""
 
-import warnings
 import yfinance as yf
 import pandas as pd
 from dataclasses import dataclass, field
 from typing import Optional
-
-# yfinance 0.2.66 uses pd.Timestamp.utcnow() internally, which is deprecated
-# in pandas 4. The warning comes from yfinance's own code — suppress it here
-# until yfinance ships a fix upstream.
-warnings.filterwarnings(
-    "ignore",
-    message="Timestamp.utcnow is deprecated",
-    category=FutureWarning,
-)
 
 # yfinance 0.2.66+ uses curl_cffi internally to impersonate Chrome at the TLS
 # level — do not pass a custom session; let yfinance handle the connection.
