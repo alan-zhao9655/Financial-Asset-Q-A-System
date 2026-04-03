@@ -36,7 +36,39 @@ RAG Agent
   ├── Confidence gate: rerank_score >= 0.35 → RAG answer
   └── Below threshold → Tavily web search fallback
 ```
+```mermaid
+graph TD
+    %% Styling
+    classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef orchestrator fill:#1e1b4b,stroke:#a78bfa,stroke-width:2px,color:#fff;
+    classDef engine fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff;
+    classDef data fill:#450a0a,stroke:#f87171,stroke-width:2px,color:#fff;
 
+    %% User & UI
+    User((User)) --> |"Plain English Query"| UI["React Frontend<br/>(Chat, 3D Globe, Charts)"]:::frontend
+
+    %% Orchestrator
+    UI <--> |"Clarification Loop"| Brain["Understanding Agent<br/>(Claude Sonnet)"]:::orchestrator
+
+    %% Routing
+    Brain -- "Routes Resolved Query" --> Router{ }
+
+    %% The Three Engines
+    Router -- "Live Performance" --> Market["Market Data Engine<br/>(yfinance + Pre-computed Metrics)"]:::engine
+    Router -- "Compare Assets" --> Compare["Comparison Engine<br/>(Parallel Market Fetch)"]:::engine
+    Router -- "Financial Concepts" --> RAG["Knowledge Retriever<br/>(FAISS + Wikipedia Corpus)"]:::engine
+
+    %% Fallback
+    RAG -- "Not in Corpus<br/>(Score < 0.35)" --> Web["Tavily Web Search<br/>(Fallback)"]:::data
+
+    %% Generation & Return
+    Market --> Synthesizer["Answer Synthesizer<br/>(Claude Sonnet)"]:::orchestrator
+    Compare --> Synthesizer
+    RAG -- "Confident Match" --> Synthesizer
+    Web --> Synthesizer
+
+    Synthesizer -- "Structured Text + Chart Data" --> UI
+```
 ---
 
 ## Tech Stack
