@@ -4,12 +4,12 @@ Flow:
   1. Retrieve top-5 parent sections via FAISS + cross-encoder reranking.
   2. Check the top rerank_score against RERANK_CONFIDENCE_THRESHOLD (0.35).
      - Score >= threshold → answer from RAG corpus (Wikipedia-sourced, curated).
-     - Score < threshold  → fall back to DuckDuckGo web search, which covers
+     - Score < threshold  → fall back to Tavily Search web search, which covers
        current events, niche topics, and questions not in the 50-article corpus.
   3. Build a grounded prompt with source attribution.
   4. Call Claude Sonnet and return the structured answer.
 
-All CPU-bound operations (FAISS, model inference, DuckDuckGo) are run in a
+All CPU-bound operations (FAISS, model inference, Tavily Search) are run in a
 thread pool to avoid blocking the async event loop.
 
 Follows the same lazy-client pattern as market_agent.py.

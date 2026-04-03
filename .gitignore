@@ -21,9 +21,10 @@ node_modules/
 dist/
 .DS_Store
 
-# FAISS index files
+# FAISS index and generated metadata (rebuilt with python -m rag.indexer)
 *.faiss
 *.index
+knowledge_meta.json
 
 # IDE
 .vscode/
